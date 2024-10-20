@@ -1,0 +1,487 @@
+---
+title: "Informe Economía Estadounidense"
+author: "Subgerencia de Estudios Económicos"
+crossref:
+  fig-title: Gráfico     # (default is "Figure")
+  tbl-title: Tabla     # (default is "Table")
+  fig-prefix: Gráfico   # (default is "Figure")
+  tbl-prefix: Tabla    # (default is "Table")
+format:
+  html:
+    toc: true
+    code-fold: false
+  pdf: 
+    documentclass: report
+    classoption: landscape
+    geometry:
+      - top=5mm
+      - left=10mm
+      - right=10mm
+editor: visual
+---
+
+```{r setup, include=FALSE}
+rm(list = ls())
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(purrr)
+library(fredr)
+fredr_set_key("672bd1f2e0dc506a82c3c6195d0d0214")
+observation_start = as.Date("2015-01-01")
+observation_end = as.Date("2023-12-01")
+```
+
+## Real GDP
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "GDPC1",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'PIB de USA, Valores Constantes',
+      '<br>','<sup>',
+      'Miles de Millones de USD',
+      '</sup>')))
+```
+
+## Unemployment Rate
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "UNRATE",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'Tasa de Desempleo de USA',
+      '<br>','<sup>',
+      'Porcentaje',
+      '</sup>')))
+```
+
+## Core Inflation
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CPILFESL",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'IPC Subyacente de USA (Excluye Alimentos y Energía)',
+      '<br>','<sup>',
+      'Índice',
+      '</sup>')))
+```
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CPIAUCSL",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'IPC Total de USA (Excluye Alimentos y Energía)',
+      '<br>','<sup>',
+      'Índice',
+      '</sup>')))
+```
+
+## GDP Growth
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "A191RL1Q225SBEA",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'PIB de USA',
+      '<br>','<sup>',
+      'Tasa de crecimiento, trimestral anualizada',
+      '</sup>')))
+```
+
+## Manufacturing Index
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "IPB50001N",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'Manufacturing Index',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Real Personal Income
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "RPI",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'Real Personal Income',
+      '<br>','<sup>',
+      'Tasa de crecimiento, trimestral anualizada',
+      '</sup>')))
+```
+
+## Real Personal Consumption
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "PCEC96",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      'Real Personal Consumption Expenditures',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Business Investment in Nonresidential Structures
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "B009RX1Q020SBEA",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Federal Government Spending: Defense
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "A824RX1Q020SBEA",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Federal Government Spending: Nondefense
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "A825RX1Q020SBEA",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## State and Local Government Spending
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "SLCEC1",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Core CPI Inflation
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CPILFESL",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      'Índice IPC Subyacente',
+      '</sup>')))
+```
+
+## CPI: Services
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CUSR0000SAS",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## CPI: Food
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CPIUFDNS",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Payroll Employment
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CES0500000017",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Average Hourly Earnings
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CEU0500000003",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Employment Cost Index
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "CIU2010000000510I",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Exports of Goods and Services
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "EXPGSC1",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Imports of Goods and Services
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "IMPGSC1",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Crude Oil Prices (WTI)
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "MCOILWTICO",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## Fed Funds Effective Rate
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "FEDFUNDS",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## CBOE Volatility Index
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "VIXCLS",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
+
+## S&P 500
+
+```{r, comment="", warning=F, message=F, echo=F}
+fredr(series_id = "SP500",
+  observation_start = observation_start,
+  observation_end = observation_end) %>%
+  plot_ly(., x = ~date, y = ~value, 
+          type = 'scatter', mode = 'lines') %>% 
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list (title = ""),
+    title = list(
+      text = paste0(
+      '',
+      '<br>','<sup>',
+      '',
+      '</sup>')))
+```
