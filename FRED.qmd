@@ -1,6 +1,6 @@
 ---
 title: "Informe Economía Estadounidense"
-author: "Subgerencia de Estudios Económicos"
+author: "Elvis Casco"
 crossref:
   fig-title: Gráfico     # (default is "Figure")
   tbl-title: Tabla     # (default is "Table")
@@ -22,14 +22,13 @@ editor: visual
 
 ```{r setup, include=FALSE}
 rm(list = ls())
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 library(plotly)
 library(purrr)
 library(fredr)
 fredr_set_key("672bd1f2e0dc506a82c3c6195d0d0214")
 observation_start = as.Date("2015-01-01")
-observation_end = as.Date("2023-12-01")
+observation_end = as.Date("2025-12-01")
 ```
 
 ## Real GDP
