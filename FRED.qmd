@@ -20,6 +20,16 @@ format:
 editor: visual
 ---
 
+```{r setup-install, include=FALSE}
+required_pkgs <- c("tidyverse", "plotly", "purrr", "fredr")
+to_install <- required_pkgs[
+  !vapply(required_pkgs, requireNamespace, logical(1), quietly = TRUE)
+]
+if (length(to_install)) {
+  install.packages(to_install, repos = "https://cloud.r-project.org")
+}
+```
+
 ```{r setup, include=FALSE}
 rm(list = ls())
 library(tidyverse)
