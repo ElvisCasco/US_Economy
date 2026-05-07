@@ -1,0 +1,13 @@
+# R session state
+.RData
+.Rhistory
+.Rproj.user/
+.Ruserdata
+
+# Quarto / R Markdown render artifacts
+*_files/
+*_cache/
+.quarto/
+
+# Rendered HTML output
+FRED.html
