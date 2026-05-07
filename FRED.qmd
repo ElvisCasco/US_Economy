@@ -36,7 +36,16 @@ library(tidyverse)
 library(plotly)
 library(purrr)
 library(fredr)
-fredr_set_key("672bd1f2e0dc506a82c3c6195d0d0214")
+## Read FRED API key from environment. Set it once per machine via:
+##   Sys.setenv(FRED_API_KEY = "your_key_here")
+## or by adding `FRED_API_KEY=your_key_here` to your ~/.Renviron file.
+fred_key <- Sys.getenv("FRED_API_KEY")
+if (!nzchar(fred_key)) {
+  stop("FRED_API_KEY environment variable is not set. ",
+       "Get a key at https://fred.stlouisfed.org/docs/api/api_key.html ",
+       "and add `FRED_API_KEY=your_key` to your ~/.Renviron, then restart R.")
+}
+fredr_set_key(fred_key)
 observation_start = as.Date("2015-01-01")
 observation_end = as.Date("2025-12-01")
 ```
